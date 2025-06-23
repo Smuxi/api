@@ -3,6 +3,7 @@ package be.katabooks.api.controller;
 import be.katabooks.api.UnauthenticatedException;
 import be.katabooks.api.service.UserService;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 public class AuthController {
@@ -14,7 +15,12 @@ public class AuthController {
 
     @PostMapping("/register")
     public String register(@RequestParam String username, @RequestParam String password) {
-        userService.registerUser(username, password);
+        try {
+            userService.registerUser(username, password);
+        } catch (Exception e) {
+            throw new ResponseStatusException(org.springframework.http.HttpStatus.BAD_REQUEST, e.getMessage(), e);
+        }
+
         return "User registered";
     }
 
