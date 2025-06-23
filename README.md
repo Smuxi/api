@@ -27,5 +27,5 @@ Navigate to the frontend directory:
 ```bash
 cd frontend
 npm install
-npm start
+npm run dev
 ```
