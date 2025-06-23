@@ -16,7 +16,8 @@ public class SecurityConfig {
                 .cors(cors -> {}) // enable CORS with default settings
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/register", "/login", "/books", "/cart", "/cart/add", "/cart/remove").permitAll()
+                        .requestMatchers("/register", "/login", "/books").permitAll()
+                        .requestMatchers("/cart/add", "/cart/remove", "/cart").authenticated()
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults());
