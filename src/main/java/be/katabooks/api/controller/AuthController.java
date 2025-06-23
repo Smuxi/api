@@ -1,0 +1,19 @@
+package be.katabooks.api.controller;
+
+import be.katabooks.api.service.UserService;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+public class AuthController {
+    private final UserService userService;
+
+    public AuthController(UserService userService) {
+        this.userService = userService;
+    }
+
+    @PostMapping("/register")
+    public String register(@RequestParam String username, @RequestParam String password) {
+        userService.registerUser(username, password);
+        return "User registered";
+    }
+}
